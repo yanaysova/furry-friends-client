@@ -1,9 +1,10 @@
 import "./App.css";
 import { Routes, Route } from "react-router";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import { usersContextRef } from "./context/usersContext";
 import axios from "axios";
 import Navbar from "./components/Navbar/Navbar";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
   // const [petId, setPetId] = useState("");
@@ -33,9 +34,12 @@ function App() {
   // };
 
   return (
-<div className="main-container">
-<Navbar></Navbar>
-</div>
+    <div className="main-container">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+      </Routes>
+    </div>
   );
 }
 

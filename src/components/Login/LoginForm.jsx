@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { usersContextRef } from "../../context/usersContext";
+import axios from "axios";
 import "./LoginForm.css";
 import StyledButton from "../../ui/StyleButton/StyledButton";
-import axios from "axios";
 import TextField from "@mui/material/TextField";
+import { Navigate } from "react-router";
+import LinkButton from "../../ui/LinkButton/LinkButton";
 
 const LoginForm = ({ handleToggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { setCurrentUser } = useContext(usersContextRef);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,6 +27,7 @@ const LoginForm = ({ handleToggleForm }) => {
         loggedUser
       );
       console.log(res);
+      setCurrentUser(res.data);
     } catch (error) {
       console.log(error.response.data);
       setErrorMessage(error.response.data);
@@ -30,20 +36,21 @@ const LoginForm = ({ handleToggleForm }) => {
 
   return (
     <div>
-      <h1>Login Form</h1>
+      <h1>Login</h1>
       {errorMessage && <span style={{ color: "red" }}>{errorMessage}</span>}
       <form className="login-form" onSubmit={(e) => handleLogin(e)}>
         <TextField
-          error={errorMessage ? true : false}
+          error={errorMessage === "emailErr" ? true : false}
           required
           id="standard-required"
           label="Email"
           variant="standard"
           autoComplete="email"
           onChange={(e) => setEmail(e.target.value)}
-          helperText={errorMessage && `${errorMessage}`}
+          helperText={errorMessage === "emailErr" && "Email does not exist"}
         />
         <TextField
+          error={errorMessage === "passwordErr" ? true : false}
           required
           id="standard-required"
           type="password"
@@ -51,10 +58,14 @@ const LoginForm = ({ handleToggleForm }) => {
           variant="standard"
           autoComplete="current-password"
           onChange={(e) => setPassword(e.target.value)}
+          helperText={errorMessage === "passwordErr" && "Incorrect passowrd"}
         />
-        <button type="submit">Login</button>
+        <StyledButton type="submit">Login</StyledButton>
       </form>
-      <StyledButton onClick={handleToggleForm}>Sign Up</StyledButton>
+      <div className="login-footer">
+        <span>Need an account?</span>
+        <LinkButton onClick={() => handleToggleForm()}>Sign up</LinkButton>
+      </div>
     </div>
   );
 };

@@ -2,3 +2,34 @@
     display: flex;
     flex-direction: column;
 }
+
+.signup-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-form input {
+    margin: 8px;
+}
+
+.signup-form button {
+    margin: 8px;
+}
+
+.signup-header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signup-header h2 {
+    font-style: italic;
+    font-weight: 300;
+}
+
+.signup-footer {
+    align-self: flex-end;
+}

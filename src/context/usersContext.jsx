@@ -1,9 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 export const usersContextRef = createContext();
 
 export const UsersContext = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   const getAllUsers = async () => {
     try {
@@ -25,11 +29,10 @@ export const UsersContext = ({ children }) => {
       value={{
         currentUser,
         setCurrentUser,
-        getAllUsers
-      }}>
+        getAllUsers,
+      }}
+    >
       {children}
     </usersContextRef.Provider>
   );
 };
-
-
