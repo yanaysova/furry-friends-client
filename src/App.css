@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Yanone+Kaffeesatz:wght@300;400;500&display=swap');
+
+:root {
+  --orange: #FFAA78;
+  --green: #80D08C;
+  --white: #ffff;
+  --blue: #00CFFF;
+  --black: #002800;
+  --grey: #DFE0DF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--grey);
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-weight: 300;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%
+}

@@ -1,0 +1,47 @@
+.nav-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 8rem;
+    margin-bottom: 3rem;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--black);
+    font-size: 14px;
+}
+
+.nav-container a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.nav-container a:visited {
+    color: inherit;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    flex: 3;
+    justify-content: space-between;
+}
+
+.user-nav button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+    width: fit-content;
+    padding: 8px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    background-color: none;
+}
+
+.user-nav button:hover {
+    background-color: var(--green);
+    cursor: pointer;
+}
