@@ -1,0 +1,24 @@
+.profile-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 3.5rem;
+    margin: 2rem 0;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field textarea {
+    height: auto;
+    min-height: 120px;
+}
+
+
+/* Add responsive styles for smaller screens */
+@media screen and (max-width: 600px) {
+    .form-container {
+        grid-template-columns: 1fr;
+    }
+}

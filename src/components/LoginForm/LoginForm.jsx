@@ -3,16 +3,15 @@ import { usersContextRef } from "../../context/usersContext";
 import axios from "axios";
 import "./LoginForm.css";
 import StyledButton from "../../ui/StyleButton/StyledButton";
-import TextField from "@mui/material/TextField";
-import { Navigate } from "react-router";
 import LinkButton from "../../ui/LinkButton/LinkButton";
+import TextInput from "../../ui/TextInput/TextInput";
 
 const LoginForm = ({ handleToggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { setCurrentUser } = useContext(usersContextRef);
+  const { setCurrentUser, setIsAdmin } = useContext(usersContextRef);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,42 +22,42 @@ const LoginForm = ({ handleToggleForm }) => {
     };
     try {
       const res = await axios.post(
-        "http://localhost:8080/users/login",
+        "http://localhost:8080/user/login",
         loggedUser
       );
-      console.log(res);
-      setCurrentUser(res.data);
+      const { user } = res.data;
+      console.log(user.isAdmin);
+      setCurrentUser(user);
+      setIsAdmin(user.isAdmin);
     } catch (error) {
-      console.log(error.response.data);
       setErrorMessage(error.response.data);
     }
   };
 
   return (
     <div>
-      <h1>Login</h1>
-      {errorMessage && <span style={{ color: "red" }}>{errorMessage}</span>}
+      <div className="login-header">
+        <h1>Login</h1>
+        <h2>Welcome back</h2>
+      </div>
       <form className="login-form" onSubmit={(e) => handleLogin(e)}>
-        <TextField
-          error={errorMessage === "emailErr" ? true : false}
-          required
-          id="standard-required"
-          label="Email"
-          variant="standard"
-          autoComplete="email"
-          onChange={(e) => setEmail(e.target.value)}
-          helperText={errorMessage === "emailErr" && "Email does not exist"}
+        <TextInput
+          errMessage={errorMessage}
+          errCode={"emailErr"}
+          label={"Email"}
+          type={"Email"}
+          autoComp={"Email"}
+          setState={setEmail}
+          errText={"Email does not exist"}
         />
-        <TextField
-          error={errorMessage === "passwordErr" ? true : false}
-          required
-          id="standard-required"
-          type="password"
-          label="Password"
-          variant="standard"
-          autoComplete="current-password"
-          onChange={(e) => setPassword(e.target.value)}
-          helperText={errorMessage === "passwordErr" && "Incorrect passowrd"}
+        <TextInput
+          errMessage={errorMessage}
+          errCode={"passwordErr"}
+          label={"Password"}
+          type={"Password"}
+          autoComp={"current-password"}
+          setState={setPassword}
+          errText={"Incorrect passowrd"}
         />
         <StyledButton type="submit">Login</StyledButton>
       </form>

@@ -1,0 +1,31 @@
+.logged-user-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.logged-user-header h1 {
+    font-size: 3rem;
+    color: var(--white);
+}
+
+.logged-selection {
+    margin-top: 2rem;
+    display: flex;
+}
+
+.logged-selection button {
+    flex: 1;
+    transition: 0.2s;
+}
+
+.logged-selection button:hover {
+    scale: 1.05;
+}
+
+.logged-selection img {
+    width: 2.5rem;
+    height: 2.5rem;
+}

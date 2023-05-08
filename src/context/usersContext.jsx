@@ -4,10 +4,25 @@ export const usersContextRef = createContext();
 
 export const UsersContext = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("Token") || "");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const headerConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
   useEffect(() => {
     console.log(currentUser);
   }, [currentUser]);
+
+  useEffect(() => {
+    const localToken = localStorage.getItem("token");
+    if (token) {
+      setToken(localToken);
+    }
+  }, [token]);
 
   const getAllUsers = async () => {
     try {
@@ -30,6 +45,7 @@ export const UsersContext = ({ children }) => {
         currentUser,
         setCurrentUser,
         getAllUsers,
+        isAdmin,
       }}
     >
       {children}

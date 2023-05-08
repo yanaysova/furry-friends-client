@@ -1,6 +1,7 @@
 .signup-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .signup-form form {
@@ -8,6 +9,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 80%;
 }
 
 .signup-form input {

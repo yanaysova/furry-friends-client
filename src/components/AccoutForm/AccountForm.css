@@ -1,0 +1,23 @@
+.account-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.account-form h3 {
+    margin: 10px 0;
+}
+
+.account-form form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding: 1rem 0;
+}
+
+.account-form form input {
+    margin: 10px 0;
+}
+
+.account-form form button {
+    margin: 10px 0;
+}

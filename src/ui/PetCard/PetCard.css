@@ -1,0 +1,11 @@
+.pet-card-content span {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+.pet-card-content div {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
