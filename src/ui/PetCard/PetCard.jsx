@@ -31,11 +31,13 @@ export default function PetCard({ pet, isLoading }) {
         <PawLoader />
       ) : (
         <>
-          <CardMedia
-            sx={{ height: 210, width: 250 }}
-            image={pet?.picture}
-            title={pet?.name}
-          />
+          {pet?.picture && (
+            <CardMedia
+              sx={{ height: 210, width: 250 }}
+              image={pet.picture}
+              title={pet.name}
+            />
+          )}
           <CardContent className="pet-card-content">
             <div>
               <BadgeIcon />

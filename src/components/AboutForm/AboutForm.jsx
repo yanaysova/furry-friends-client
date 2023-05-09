@@ -68,7 +68,7 @@ const AboutForm = ({ handleAlert }) => {
         setState={setPhoneNum}
       />
       <TextField
-        id="outlined-multiline-static"
+        id="UserBio"
         label="Bio"
         multiline
         rows={4}

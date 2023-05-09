@@ -2,17 +2,21 @@ import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { usersContextRef } from "../../context/usersContext";
 
-const ProtectedRoute = ({ children }) => {
-  const { currentUser } = useContext(usersContextRef);
-  const isLoggedIn = currentUser;
+const ProtectedRoute = ({ children, role }) => {
+  const { isAdmin, currentUser } = useContext(usersContextRef);
 
-  if (!isLoggedIn) {
+  if (
+    (role === "admin" && !isAdmin) ||
+    (role === "user" && !currentUser) ||
+    (!isAdmin && !currentUser)
+  ) {
     return (
       <>
         <Navigate to="/auth" replace />
       </>
     );
   }
+
   return children;
 };
 

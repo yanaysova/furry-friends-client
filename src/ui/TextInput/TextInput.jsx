@@ -3,13 +3,13 @@ import TextField from "@mui/material/TextField";
 
 const TextInput = ({
   isRequiered = true,
-  errMessage = null,
+  errMessage = undefined,
   errCode = "",
   label,
   type,
   autoComp,
   setState,
-  value = null,
+  value = undefined,
   optionalHelper = "",
   errText = "",
 }) => {
@@ -19,7 +19,7 @@ const TextInput = ({
 
   return (
     <TextField
-      style={{ width: "100%" }}
+      style={{ width: "100%", margin: "0 10px" }}
       error={hasError}
       required={isRequiered}
       label={label}

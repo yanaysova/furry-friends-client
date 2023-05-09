@@ -10,9 +10,10 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import PetsIcon from "@mui/icons-material/Pets";
 import Logout from "@mui/icons-material/Logout";
+import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 
 export default function AvatarMenu() {
-  const { currentUser, setCurrentUser } = useContext(usersContextRef);
+  const { currentUser, setCurrentUser, isAdmin } = useContext(usersContextRef);
   const [anchorEl, setAnchorEl] = useState(null);
   const [firstNameLetter, setFirstNameLetter] = useState("");
   const open = Boolean(anchorEl);
@@ -41,6 +42,11 @@ export default function AvatarMenu() {
 
   const handleMyPets = () => {
     navigate("/user/mypets");
+    handleClose();
+  };
+
+  const handleDashboard = () => {
+    navigate("/admin");
     handleClose();
   };
 
@@ -101,12 +107,21 @@ export default function AvatarMenu() {
           <Avatar /> {currentUser.firstName} {currentUser.lastName}
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleMyPets}>
-          <ListItemIcon>
-            <PetsIcon fontSize="small" />
-          </ListItemIcon>
-          My Pets
-        </MenuItem>
+        {isAdmin ? (
+          <MenuItem onClick={handleDashboard}>
+            <ListItemIcon>
+              <DashboardCustomizeOutlinedIcon fontSize="small" />
+            </ListItemIcon>
+            Dashboard
+          </MenuItem>
+        ) : (
+          <MenuItem onClick={handleMyPets}>
+            <ListItemIcon>
+              <PetsIcon fontSize="small" />
+            </ListItemIcon>
+            My Pets
+          </MenuItem>
+        )}
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />

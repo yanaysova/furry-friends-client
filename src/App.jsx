@@ -11,6 +11,7 @@ import MyPets from "./pages/MyPets/MyPets";
 import { ThemeProvider } from "@mui/material/styles";
 import MuiTheme from "./ui/Styles/MuiTheme";
 import PetPage from "./pages/PetPage/PetPage";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 
 function App() {
   const [openAuthModal, setOpenAuthModal] = useState(false);
@@ -46,7 +47,7 @@ function App() {
           <Route
             path="/user/profile"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute role={"user"}>
                 <ProfileSettings />
               </ProtectedRoute>
             }
@@ -54,8 +55,16 @@ function App() {
           <Route
             path="/user/mypets"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute role={"user"}>
                 <MyPets />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute role={"admin"}>
+                <AdminDashboard />
               </ProtectedRoute>
             }
           ></Route>

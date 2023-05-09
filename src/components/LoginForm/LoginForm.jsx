@@ -5,6 +5,7 @@ import "./LoginForm.css";
 import StyledButton from "../../ui/StyleButton/StyledButton";
 import LinkButton from "../../ui/LinkButton/LinkButton";
 import TextInput from "../../ui/TextInput/TextInput";
+import { useNavigate } from "react-router";
 
 const LoginForm = ({ handleToggleForm }) => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ const LoginForm = ({ handleToggleForm }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const { setCurrentUser, setIsAdmin } = useContext(usersContextRef);
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,11 +29,14 @@ const LoginForm = ({ handleToggleForm }) => {
         loggedUser
       );
       const { user } = res.data;
-      console.log(user.isAdmin);
       setCurrentUser(user);
       setIsAdmin(user.isAdmin);
+      if (user.isAdmin) {
+        navigate("/admin");
+      }
     } catch (error) {
-      setErrorMessage(error.response.data);
+      console.log(error);
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -43,7 +49,7 @@ const LoginForm = ({ handleToggleForm }) => {
       <form className="login-form" onSubmit={(e) => handleLogin(e)}>
         <TextInput
           errMessage={errorMessage}
-          errCode={"emailErr"}
+          errCode={"Invalid email"}
           label={"Email"}
           type={"Email"}
           autoComp={"Email"}
@@ -52,12 +58,12 @@ const LoginForm = ({ handleToggleForm }) => {
         />
         <TextInput
           errMessage={errorMessage}
-          errCode={"passwordErr"}
+          errCode={"Incorrect Password"}
           label={"Password"}
           type={"Password"}
           autoComp={"current-password"}
           setState={setPassword}
-          errText={"Incorrect passowrd"}
+          errText={"Incorrect password"}
         />
         <StyledButton type="submit">Login</StyledButton>
       </form>

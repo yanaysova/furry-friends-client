@@ -7,11 +7,11 @@ export const UsersContext = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("Token") || "");
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const headerConfig = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  // const headerConfig = {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // };
 
   useEffect(() => {
     console.log(currentUser);
@@ -45,6 +45,7 @@ export const UsersContext = ({ children }) => {
         currentUser,
         setCurrentUser,
         getAllUsers,
+        setIsAdmin,
         isAdmin,
       }}
     >

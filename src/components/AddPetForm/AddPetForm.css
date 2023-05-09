@@ -1,0 +1,20 @@
+.add-pet-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 10px;
+    width: 100%;
+}
+
+.input-box {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.add-pet-form input,
+.add-pet-form textarea,
+.add-pet-form select {
+    width: 100%;
+    padding: 8px;
+    margin: 0 10px;
+}
