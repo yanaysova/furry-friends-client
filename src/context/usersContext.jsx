@@ -4,7 +4,6 @@ export const usersContextRef = createContext();
 
 export const UsersContext = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [isAdmin, setIsAdmin] = useState(false);
 
   const validateAccessToken = async (token) => {
@@ -32,12 +31,6 @@ export const UsersContext = ({ children }) => {
       });
     }
   }, []);
-
-  //Logs user out
-
-  //Checks current user on load
-
-  //Saves user to current user
 
   return (
     <usersContextRef.Provider

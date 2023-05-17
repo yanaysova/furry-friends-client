@@ -7,7 +7,7 @@ import { usersContextRef } from "../../context/usersContext";
 import AvatarMenu from "../../ui/AvatarMenu/AvatarMenu";
 
 const Navbar = () => {
-  const { currentUser, setCurrentUser } = useContext(usersContextRef);
+  const { currentUser } = useContext(usersContextRef);
 
   const navigate = useNavigate();
 

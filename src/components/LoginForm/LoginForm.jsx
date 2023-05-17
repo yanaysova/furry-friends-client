@@ -1,12 +1,11 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { usersContextRef } from "../../context/usersContext";
-import axios from "axios";
-import "./LoginForm.css";
+import { useNavigate } from "react-router";
+import { privateInstance } from "../../utilities/api";
 import StyledButton from "../../ui/StyleButton/StyledButton";
 import LinkButton from "../../ui/LinkButton/LinkButton";
 import TextInput from "../../ui/TextInput/TextInput";
-import { useNavigate } from "react-router";
-import { publicInstance } from "../../utilities/api";
+import "./LoginForm.css";
 
 const LoginForm = ({ handleToggleForm }) => {
   const [email, setEmail] = useState("");
@@ -25,9 +24,8 @@ const LoginForm = ({ handleToggleForm }) => {
       password,
     };
     try {
-      const res = await publicInstance.post("/auth/login", loggedUser);
+      const res = await privateInstance.post("/auth/login", loggedUser);
       const { user } = res.data;
-      console.log(res.data);
       setCurrentUser(user);
       setIsAdmin(user.isAdmin);
       localStorage.setItem("token", res.data.token);
@@ -76,54 +74,3 @@ const LoginForm = ({ handleToggleForm }) => {
 };
 
 export default LoginForm;
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-
-//   try {
-//       const response = await axios.post(LOGIN_URL,
-//           JSON.stringify({ user, pwd }),
-//           {
-//               headers: { 'Content-Type': 'application/json' },
-//               withCredentials: true
-//           }
-//       );
-//       console.log(JSON.stringify(response?.data));
-//       //console.log(JSON.stringify(response));
-//       const accessToken = response?.data?.accessToken;
-//       const roles = response?.data?.roles;
-//       setAuth({ user, pwd, roles, accessToken });
-//       setUser('');
-//       setPwd('');
-//       navigate(from, { replace: true });
-//   } catch (err) {
-//       if (!err?.response) {
-//           setErrMsg('No Server Response');
-//       } else if (err.response?.status === 400) {
-//           setErrMsg('Missing Username or Password');
-//       } else if (err.response?.status === 401) {
-//           setErrMsg('Unauthorized');
-//       } else {
-//           setErrMsg('Login Failed');
-//       }
-//       errRef.current.focus();
-//   }
-// }
-
-// export async function verifyOtp(
-//   otp: string,
-//   phone: string
-// ): Promise<User | null> {
-//   const verifyResponse = await submitOtp(otp, phone);
-//   if (verifyResponse?.data?.data?.token) {
-//     setAuthToken(verifyResponse.data.data.token);
-//     const userData = decodeToken < User > verifyResponse.data.data.token;
-//     return userData;
-//   } else {
-//     return null;
-//   }
-// }
-
-// export function setAuthToken(token: string): void {
-//   return localStorage.setItem(Constants.LOCALSTORAGE_TOKEN_NAME, token);
-// }

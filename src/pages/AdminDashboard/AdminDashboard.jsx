@@ -35,7 +35,7 @@ const AdminDashboard = () => {
   return (
     <div className="admin-page">
       <h1>Admin Dashboard</h1>
-      <h2>Hi {currentUser.firstName}</h2>
+      <h2>Hi {currentUser?.firstName}</h2>
       <TabBox value={activeTab} handleChange={handleTabChange} tabs={tabs} />
       {activeTab === 0 && <p>General Information Content</p>}
       {activeTab === 1 && <ManageUsers handleAlert={handleAlert} />}

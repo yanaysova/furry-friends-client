@@ -11,6 +11,7 @@ import Tooltip from "@mui/material/Tooltip";
 import PetsIcon from "@mui/icons-material/Pets";
 import Logout from "@mui/icons-material/Logout";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
+import { privateInstance } from "../../utilities/api";
 
 export default function AvatarMenu() {
   const { currentUser, setCurrentUser, isAdmin } = useContext(usersContextRef);
@@ -30,8 +31,17 @@ export default function AvatarMenu() {
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
-    setCurrentUser(null);
+  const handleLogout = async () => {
+    try {
+      const response = await privateInstance.post("/auth/logout");
+      if (response.status === 200) {
+        localStorage.removeItem("token");
+        navigate("/");
+        setCurrentUser(null);
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
     handleClose();
   };
 
