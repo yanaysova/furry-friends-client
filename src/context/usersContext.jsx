@@ -1,37 +1,37 @@
 import { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import { publicInstance } from "../utilities/api";
 export const usersContextRef = createContext();
 
 export const UsersContext = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("Token") || "");
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // const headerConfig = {
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // };
-
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
-
-  useEffect(() => {
-    const localToken = localStorage.getItem("token");
-    if (token) {
-      setToken(localToken);
-    }
-  }, [token]);
-
-  const getAllUsers = async () => {
+  const validateAccessToken = async (token) => {
     try {
-      const res = await axios.get("http://localhost:8080/users");
-      console.log(res);
+      const response = await publicInstance.get("/auth/validate", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data;
     } catch (error) {
-      console.log(error);
+      console.error("Error validating access token:", error);
+      return { valid: false };
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      validateAccessToken(token).then(({ valid, user }) => {
+        if (valid) {
+          setCurrentUser(user);
+          setIsAdmin(user.isAdmin);
+        } else {
+          localStorage.removeItem("token");
+        }
+      });
+    }
+  }, []);
 
   //Logs user out
 
@@ -44,7 +44,6 @@ export const UsersContext = ({ children }) => {
       value={{
         currentUser,
         setCurrentUser,
-        getAllUsers,
         setIsAdmin,
         isAdmin,
       }}

@@ -4,6 +4,8 @@ import { usersContextRef } from "../../context/usersContext";
 import TabBox from "../../ui/TabBox/TabBox";
 import AddPetForm from "../../components/AddPetForm/AddPetForm";
 import SnackbarAlert from "../../ui/SnackbarAlert/SnackbarAlert";
+import ManageUsers from "../../components/ManageUsers/ManageUsers";
+import ManagePets from "../../components/ManagePets/ManagePets";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -36,8 +38,8 @@ const AdminDashboard = () => {
       <h2>Hi {currentUser.firstName}</h2>
       <TabBox value={activeTab} handleChange={handleTabChange} tabs={tabs} />
       {activeTab === 0 && <p>General Information Content</p>}
-      {activeTab === 1 && <p>Users Content</p>}
-      {activeTab === 2 && <p>Pets Content</p>}
+      {activeTab === 1 && <ManageUsers handleAlert={handleAlert} />}
+      {activeTab === 2 && <ManagePets handleAlert={handleAlert} />}
       {activeTab === 3 && <AddPetForm handleAlert={handleAlert} />}
       {activeTab === 4 && <p>Account Settings Content</p>}
       <SnackbarAlert

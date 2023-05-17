@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Box } from "@mui/material";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 
-const UploadButton = ({ setFile }) => {
+const UploadButton = ({ setFile, setIsEmpty, isEmpty }) => {
   const [filename, setFilename] = useState("");
 
   const handleFileUpload = (e) => {
@@ -13,6 +13,7 @@ const UploadButton = ({ setFile }) => {
     setFile(file);
     const { name } = file;
     setFilename(name);
+    setIsEmpty(false);
   };
 
   return (
@@ -25,7 +26,6 @@ const UploadButton = ({ setFile }) => {
       >
         Upload Image*
         <input
-          required="true"
           type="file"
           accept="image/*"
           hidden
@@ -33,6 +33,7 @@ const UploadButton = ({ setFile }) => {
         />
       </Button>
       <Box>{filename}</Box>
+      {isEmpty && <span style={{ color: "red" }}>*Please upload image</span>}
     </div>
   );
 };
