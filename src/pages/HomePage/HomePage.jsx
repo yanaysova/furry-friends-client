@@ -1,14 +1,8 @@
-import { useEffect, useState, useContext } from "react";
-import { usersContextRef } from "../../context/usersContext";
-import NewUserHeader from "../../components/NewUserHeader/NewUserHeader";
-import LoggedUserHeader from "../../components/LoggedUserHeader/LoggedUserHeader";
 import banner from "../../assets/banner.jpg";
 import NewAdditions from "../../components/NewAdditions/NewAdditions";
-import PawSpinner from "../../ui/PawLoader/PawLoader";
+import HeroSection from "../../components/HeroSection/HeroSection";
 
 const HomePage = () => {
-  const { currentUser } = useContext(usersContextRef);
-
   return (
     <div className="main-container">
       <section
@@ -23,7 +17,7 @@ const HomePage = () => {
           height: "400px",
         }}
       >
-        {currentUser ? <LoggedUserHeader /> : <NewUserHeader />}
+        <HeroSection />
       </section>
       <section style={{ width: "100%", marginTop: "1rem" }}>
         <NewAdditions />

@@ -1,15 +1,16 @@
 import { useState, useContext, useEffect } from "react";
 import { usersContextRef } from "../../context/usersContext";
-import axios from "axios";
 import StyledButton from "../../ui/StyleButton/StyledButton";
 import TextInput from "../../ui/TextInput/TextInput";
 import "./AccountForm.css";
 import { checkPasswordMatch } from "../../utilities/utilities";
+import { privateInstance } from "../../utilities/api";
 
 const AccountForm = ({ handleAlert }) => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rePassword, setRePassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [reNewPassword, setNewRePassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { currentUser, setCurrentUser } = useContext(usersContextRef);
 
@@ -21,52 +22,50 @@ const AccountForm = ({ handleAlert }) => {
     e.preventDefault();
     setErrorMessage("");
     try {
-      const res = await axios.put(
-        `http://localhost:8080/user/${currentUser.id}/email`,
-        { email: email }
+      const res = await privateInstance.put(`/user/${currentUser.id}/email`, {
+        email: email,
+      });
+      setCurrentUser(res.data.data);
+      handleAlert(
+        `Email address successfully updated to ${res.data.data.email}`,
+        "success"
       );
-      setCurrentUser(res.data);
-      handleAlert("Email address successfully updated", "success");
     } catch (error) {
       console.log(error);
-      handleAlert(error.message, "error");
-      setErrorMessage(error.response.data);
+      handleAlert(error.response.data.message, "error");
     }
   };
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     setErrorMessage("");
-    if (!checkPasswordMatch(password, rePassword)) {
+    if (!checkPasswordMatch(newPassword, reNewPassword)) {
       setErrorMessage("passwordErr");
       return;
     }
     try {
-      const res = await axios.put(
-        `http://localhost:8080/users/${currentUser.id}/password`,
-        { password: password }
-      );
-      setCurrentUser(res.data);
+      await privateInstance.put(`/user/${currentUser.id}/password`, {
+        password: currentPassword,
+        newPassword: newPassword,
+      });
       handleAlert("Password address successfully updated", "success");
     } catch (error) {
-      console.log(error);
-      handleAlert(error.message, "error");
+      console.log(error.response.data);
+      handleAlert(error.response.data.message, "error");
     }
   };
 
   return (
     <div className="account-form">
-      <h3>Email</h3>
+      <h3>Change Email</h3>
       <form onSubmit={(e) => handleEmailChange(e)}>
         <TextInput
-          errMessage={errorMessage}
           errCode={"userExistsErr"}
           label={"Email"}
           type={"email"}
           autoComp={"email"}
           setState={setEmail}
           value={email}
-          errText={"Email already in use."}
         />
         <StyledButton
           type="submit"
@@ -75,26 +74,37 @@ const AccountForm = ({ handleAlert }) => {
           Change Email
         </StyledButton>
       </form>
-      <h3>Password</h3>
+      <h3>Change Password</h3>
       <form onSubmit={(e) => handlePasswordChange(e)}>
         <TextInput
-          errMessage={errorMessage}
-          errCode={"passwordErr"}
-          label={"Password"}
+          label={"Current password"}
           type={"password"}
           autoComp={"current-password"}
-          setState={setPassword}
+          setState={setCurrentPassword}
         />
         <TextInput
           errMessage={errorMessage}
           errCode={"passwordErr"}
-          label={"Confirm Password"}
+          label={"New password"}
+          type={"password"}
+          autoComp={"current-password"}
+          setState={setNewPassword}
+        />
+        <TextInput
+          errMessage={errorMessage}
+          errCode={"passwordErr"}
+          label={"Confirm new password"}
           type={"password"}
           autoComp={"new-password"}
-          setState={setRePassword}
+          setState={setNewRePassword}
           errText={"Passwords don't match."}
         />
-        <StyledButton type="submit" disabled={password ? false : true}>
+        <StyledButton
+          type="submit"
+          disabled={
+            newPassword && currentPassword && reNewPassword ? false : true
+          }
+        >
           Change Password
         </StyledButton>
       </form>

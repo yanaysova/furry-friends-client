@@ -19,3 +19,14 @@
     padding: 8px;
     margin: 0 10px;
 }
+
+.admin-pet-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-pet-info span {
+    margin: 8px;
+    font-size: 1.2rem;
+    font-weight: 400;
+}

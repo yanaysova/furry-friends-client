@@ -1,0 +1,16 @@
+.results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 1rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 8rem);
+}
+
+.pet-gallery {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}

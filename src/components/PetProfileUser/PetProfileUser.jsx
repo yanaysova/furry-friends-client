@@ -13,9 +13,7 @@ const PetProfileUser = ({ pet }) => {
 
   const {
     name,
-    type,
     adoptionStatus,
-    picture,
     height,
     weight,
     color,
@@ -45,13 +43,11 @@ const PetProfileUser = ({ pet }) => {
   };
 
   return (
-    <div className="pet-card">
+    <div className="more-info">
       <h1>{name}</h1>
-      <img src={picture} alt={name} />
-      <p>Type: {type}</p>
       <p>Adoption Status: {adoptionStatus}</p>
-      <p>Height: {height} inches</p>
-      <p>Weight: {weight} lbs</p>
+      <p>Height: {height} cm</p>
+      <p>Weight: {weight} kg</p>
       <p>Color: {color}</p>
       <p>Breed: {breed}</p>
       <p>Bio: {bio}</p>

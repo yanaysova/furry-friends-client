@@ -1,26 +1,20 @@
 /* Style for the pet card container */
-.pet-card {
+.more-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Style for the pet card image */
-.pet-card img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 10px;
+.more-info h1 {
+    font-size: 2rem;
+    color: var(--orange);
+}
+
+.more-info p {
+    font-size: 1.2rem;
 }
 
 /* Style for the pet card buttons */
-.pet-card button {
+.more-info button {
     margin: 5px;
     padding: 10px 20px;
     border-radius: 5px;
@@ -30,24 +24,24 @@
     cursor: pointer;
 }
 
-.pet-card button.save {
+.more-info button.save {
     background-color: #5cb85c;
 }
 
-.pet-card button.foster {
+.more-info button.foster {
     background-color: #f0ad4e;
 }
 
-.pet-card button.adopt {
+.more-info button.adopt {
     background-color: #d9534f;
 }
 
-.pet-card button.return {
+.more-info button.return {
     background-color: #5bc0de;
 }
 
 /* Style for the pet card button container */
-.pet-card .button-container {
+.more-info .button-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -55,6 +49,6 @@
 }
 
 /* Style for the pet card save button when already saved */
-.pet-card button.save.saved {
+.more-info button.save.saved {
     background-color: #f0ad4e;
 }

@@ -36,14 +36,7 @@ function App() {
               </>
             }
           ></Route>
-          <Route
-            path="/search"
-            element={
-              <ProtectedRoute>
-                <SearchPage />
-              </ProtectedRoute>
-            }
-          ></Route>
+          <Route path="/search" element={<SearchPage />}></Route>
           <Route
             path="/user/profile"
             element={
@@ -75,29 +68,3 @@ function App() {
 }
 
 export default App;
-
-// const [petId, setPetId] = useState("");
-// const [petName, setPetName] = useState(null);
-// const { getAllUsers } = useContext(usersContextRef);
-
-// const getAllPets = async () => {
-//   try {
-//     const res = await axios.get("http://localhost:8080/pets");
-//     console.log(res);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// const getPetById = async (e, id) => {
-//   e.preventDefault();
-//   try {
-//     const res = await axios.get(`http://localhost:8080/pets/${id}`);
-//     const petData = await res.data;
-//     setPetName(petData.name);
-//     console.log(petData);
-//     console.log(petData.name);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };

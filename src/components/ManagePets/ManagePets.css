@@ -1,0 +1,23 @@
+.search-wrapper {
+    display: flex;
+    margin: 1rem 0;
+}
+
+.search-wrapper input {
+    border: 2px solid var(--grey);
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    height: 3rem;
+    padding: 5px;
+    margin: 0 8px;
+}
+
+.search-wrapper input:focus {
+    outline: none;
+    border-color: var(--orange);
+}
+
+.search-wrapper select {
+    margin: 0 8px;
+}

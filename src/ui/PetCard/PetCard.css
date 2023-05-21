@@ -1,11 +1,32 @@
+.pet-card-content {
+    padding: 10px 16px !important;
+}
+
 .pet-card-content span {
     font-family: 'Yanone Kaffeesatz', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 1.2rem;
 }
 
-.pet-card-content div {
-    margin: 10px;
+.pet-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--orange);
+}
+
+.card-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+    grid-auto-flow: row;
+    justify-items: center;
+    align-items: center;
+}
+
+.card-info div {
+    margin-top: 10px;
     display: flex;
     align-items: center;
 }

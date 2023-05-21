@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
 import { checkPasswordMatch } from "../../utilities/utilities";
 import "./SignUpForm.css";
 import StyledButton from "../../ui/StyleButton/StyledButton";
 import LinkButton from "../../ui/LinkButton/LinkButton";
 import TextInput from "../../ui/TextInput/TextInput";
+import { publicInstance } from "../../utilities/api";
+import { usersContextRef } from "../../context/usersContext";
 
 const SignupForm = ({ handleToggleForm }) => {
   const [email, setEmail] = useState("");
@@ -14,6 +15,8 @@ const SignupForm = ({ handleToggleForm }) => {
   const [lastName, setLastName] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { setCurrentUser, setIsAdmin } = useContext(usersContextRef);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -30,12 +33,11 @@ const SignupForm = ({ handleToggleForm }) => {
       phoneNum,
     };
     try {
-      const res = await axios.post(
-        "http://localhost:8080/user/signup",
-        newUser
-      );
-      console.log(res);
-      handleToggleForm();
+      const res = await publicInstance.post("/auth/signup", newUser);
+      const { user } = res.data;
+      setCurrentUser(user);
+      setIsAdmin(user.isAdmin);
+      localStorage.setItem("token", res.data.token);
     } catch (error) {
       console.log(error.response.data);
       setErrorMessage(error.response.data);

@@ -47,6 +47,7 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
     { label: "Available", value: "Available" },
     { label: "Adopted", value: "Adopted" },
     { label: "Fostered", value: "Fostered" },
+    { label: "Inactive", value: "Inactive" },
   ];
 
   const handleSubmit = async (e) => {
@@ -84,6 +85,16 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
       } else {
         handleAlert(error.message, "error");
       }
+    }
+  };
+
+  //TODO: Implement delete?
+  const handleDelete = async () => {
+    try {
+      await uploadInstance.delete(`/pet/${selectedPet._id}`);
+      handleAlert(`${name} successfully deleted from database`, "success");
+    } catch (error) {
+      handleAlert(error.message, "error");
     }
   };
 
@@ -156,15 +167,40 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
             setState={setWeight}
           />
         </div>
+        {/* TODO: Update user name for adopted and fostered */}
         <div className="input-box" style={{ justifyContent: "space-between" }}>
-          <div style={{ width: "50%" }}>
-            <Selector
-              label={"Adoption Status"}
-              menuItems={adoptionStatusSelector}
-              state={adoptionStatus}
-              setState={setAdoptionStatus}
-            />
-          </div>
+          {selectedPet ? (
+            <div className="admin-pet-info">
+              {selectedPet.adoptionStatus === "Available" && (
+                <span>Adoption Status: Available</span>
+              )}
+              {selectedPet.adoptionStatus === "Adopted" && (
+                <span>Adopted by Admin</span>
+              )}
+              {selectedPet.adoptionStatus === "Fostered" && (
+                <span>Fostered by Admin</span>
+              )}
+              <span>Created by: {selectedPet.createdBy}</span>
+              <span>
+                Created at: {new Date(selectedPet.createdAt).toLocaleString()}
+              </span>
+              {selectedPet.editedAt && (
+                <span>
+                  Last Edited at:{" "}
+                  {new Date(selectedPet.editedAt).toLocaleString()}
+                </span>
+              )}
+            </div>
+          ) : (
+            <div style={{ width: "50%" }}>
+              <Selector
+                label={"Adoption Status"}
+                menuItems={adoptionStatusSelector}
+                state={adoptionStatus}
+                setState={setAdoptionStatus}
+              />
+            </div>
+          )}
           <div>
             {!selectedPet && (
               <UploadButton
@@ -227,6 +263,10 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
         <StyledButton type="submit">
           {selectedPet ? "Update Changes" : "Upload Pet"}
         </StyledButton>
+        {/* TODO: Implement delete pet? needs to delete from user favorites and adopted status */}
+        {/* {selectedPet && (
+          <StyledButton onClick={handleDelete}>Delete Pet</StyledButton>
+        )} */}
       </form>
       {selectedPet && (
         <Tooltip title="Back to list">

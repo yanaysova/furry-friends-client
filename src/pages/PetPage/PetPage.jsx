@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { usersContextRef } from "../../context/usersContext";
 import "./PetPage.css";
 import PawLoader from "../../ui/PawLoader/PawLoader";
 import { useParams } from "react-router-dom";

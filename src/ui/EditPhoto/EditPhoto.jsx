@@ -24,22 +24,26 @@ const EditPhoto = ({ imageUrl, setFile }) => {
       />
       <label htmlFor="file-upload">
         <Button
-          component="span"
-          variant="contained"
           sx={{
             position: "absolute",
-            bottom: "5%",
-            right: "5%",
+            bottom: 8,
+            right: 8,
             borderRadius: "50%",
-            width: "50px",
-            height: "50px",
+            width: "45px",
+            minWidth: "45px",
+            height: "45px",
             padding: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            background: "#ffffff",
+            opacity: "0.95",
+            transition: "opacity 0.3s ease",
+            "&:hover": {
+              opacity: "1",
+              background: "#ffffff",
+              boxShadow: "rgba(100, 100, 111, 0.3) 0px 5px 5px 0px",
+            },
           }}
         >
-          <EditIcon sx={{ lineHeight: "50px" }} />
+          <EditIcon />
           <input
             id="file-upload"
             type="file"

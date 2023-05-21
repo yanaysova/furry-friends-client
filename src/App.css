@@ -19,6 +19,7 @@ html {
   /* background-color: var(--grey); */
   font-family: 'Yanone Kaffeesatz', sans-serif;
   font-weight: 300;
+  background-color: #F9F9F9;
 }
 
 .main-container {

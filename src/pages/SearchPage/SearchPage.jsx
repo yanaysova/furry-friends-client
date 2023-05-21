@@ -1,32 +1,22 @@
 import React, { useEffect } from "react";
-import axios from "axios";
+import SearchResults from "../../components/SearchResults/SearchResults";
+import SearchFilter from "../../components/SearchFilter/SearchFilter";
 
 const SearchPage = () => {
-  const getPets = async (params) => {
-    console.log(params);
-    try {
-      const res = await axios.get(`http://localhost:8080/pet`, {
-        params: params,
-      });
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    // Get the "type" query parameter from the URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const typeParam = urlParams.get("type");
-
-    // Call getPets with the type parameter
-    getPets({ type: typeParam });
-  }, []);
-
   return (
     <>
-      <div>Search Page</div>
-      <p>you are logged in</p>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <SearchFilter />
+        <SearchResults />
+      </div>
     </>
   );
 };

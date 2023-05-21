@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./NewAdditions.css";
 import PetCard from "../../ui/PetCard/PetCard";
-import axios from "axios";
+import { publicInstance } from "../../utilities/api";
 
 const NewAdditions = () => {
   const [newAdditionsArray, setNewAdditionsArray] = useState([]);
@@ -12,9 +12,7 @@ const NewAdditions = () => {
     const getNewPets = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.get(
-          "http://localhost:8080/pet/3-newest-additions"
-        );
+        const res = await publicInstance.get("/pet/3-newest-additions");
         const pets = await res.data.data.results;
         setNewAdditionsArray(pets);
         setIsLoading(false);

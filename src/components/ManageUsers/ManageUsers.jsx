@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { privateInstance } from "../../utilities/api.js";
 import DataTable from "../../ui/DataTable/DataTable.jsx";
+import UserProfile from "../UserProfile/UserProfile.jsx";
 
 const ManageUsers = ({ handleAlert }) => {
   const [userList, setUserList] = useState([]);
+  const [isEditPage, setIsEditPage] = useState(false);
+  const [selectedUser, setSelectedUser] = useState("");
 
   useEffect(() => {
     const getUsersList = async () => {
       try {
         const res = await privateInstance.get("/user");
         const users = await res.data.data.results;
-        console.log(users);
         setUserList(users);
       } catch (error) {
         handleAlert(error.response.data.message, "error");
@@ -23,13 +25,18 @@ const ManageUsers = ({ handleAlert }) => {
     const query = event.target.value;
     try {
       console.log(query);
-      const res = await privateInstance.get(`/user?phoneNum=${query}`);
+      const res = await privateInstance.get(`/user?firstName=${query}`);
       console.log(res);
       const users = await res.data.data.results;
       setUserList(users);
     } catch (error) {
       handleAlert(error.response.data.message, "error");
     }
+  };
+
+  const handleEditPage = (user) => {
+    setIsEditPage(!isEditPage);
+    setSelectedUser(user);
   };
 
   const userColumns = [
@@ -42,11 +49,24 @@ const ManageUsers = ({ handleAlert }) => {
   ];
 
   return (
-    <div>
-      <h1>users</h1>
-      <input type="text" onChange={handleSearch} />
-      <DataTable data={userList} columns={userColumns} onEditPath={"/user/"} />
-    </div>
+    <>
+      {isEditPage ? (
+        <UserProfile
+          selectedUser={selectedUser}
+          handleEditPage={handleEditPage}
+        />
+      ) : (
+        <div>
+          <h1>users</h1>
+          <input type="text" onChange={handleSearch} />
+          <DataTable
+            data={userList}
+            columns={userColumns}
+            handleEditPage={handleEditPage}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
