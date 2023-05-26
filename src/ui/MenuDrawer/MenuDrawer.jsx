@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-const MenuDrawer = ({ label, menuItems, state, setState }) => {
+const MenuDrawer = ({ label, menuItems, setState, customContent }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -32,7 +32,10 @@ const MenuDrawer = ({ label, menuItems, state, setState }) => {
           textOverflow: "ellipsis",
           overflow: "hidden",
           whiteSpace: "nowrap",
-          maxWidth: "150px",
+          maxWidth: "200px",
+          minWidth: "130px",
+          margin: "0 8px",
+          fontSize: "0.8rem",
         }}
       >
         {label}
@@ -56,18 +59,21 @@ const MenuDrawer = ({ label, menuItems, state, setState }) => {
         getContentAnchorEl={null}
         sx={{
           marginTop: "14px",
-          zIndex: 9999,
         }}
       >
-        {menuItems.map((item) => (
-          <MenuItem
-            value={item.value}
-            key={item.label}
-            onClick={() => handleMenuItemClick(item.value)}
-          >
-            {item.label}
-          </MenuItem>
-        ))}
+        {customContent ? (
+          <MenuItem>{customContent}</MenuItem>
+        ) : (
+          menuItems.map((item) => (
+            <MenuItem
+              value={item.value}
+              key={item.label}
+              onClick={() => handleMenuItemClick(item.value)}
+            >
+              {item.label}
+            </MenuItem>
+          ))
+        )}
       </Menu>
     </div>
   );

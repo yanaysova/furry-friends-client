@@ -1,40 +1,5 @@
-/* .site-header {
-    font-family: 'Pacifico', cursive;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    text-decoration: underline;
-    text-decoration-color: rgba(0, 0, 0, 0.8);
-    flex: 1;
-    position: absolute;
-}
-
-.site-header h1 {
-    font-size: 2rem;
-    color: var(--orange);
-}
-
 .site-header img {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-left: 1rem;
-} */
-
-.site-header {
-    position: relative;
-    display: flex;
-}
-
-.site-header img {
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-20%);
-    z-index: 1;
-    border-radius: 50%;
-    background-color: white;
-    overflow: hidden;
-    width: 8rem;
-    height: 8rem;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    width: 90%;
+    min-width: 150px;
+    height: auto;
 }

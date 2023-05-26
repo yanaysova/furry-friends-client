@@ -1,54 +1,99 @@
-/* Style for the pet card container */
-.more-info {
+.pet-wrapper {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
-.more-info h1 {
-    font-size: 2rem;
+.pet-wrapper h1 {
+    font-size: 3rem;
     color: var(--orange);
+    margin-bottom: 1rem;
 }
 
-.more-info p {
-    font-size: 1.2rem;
+.pet-wrapper h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
-/* Style for the pet card buttons */
-.more-info button {
+.pet-wrapper p {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+.photo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photo-wrapper img {
+    border-radius: 20px;
+    margin: 1rem 0;
+}
+
+
+.pet-information {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.text-fields {
+    width: 50%;
+    border: 1px solid #00000510;
+    border-radius: 10px;
+    padding: 8px;
+    margin-right: 8px;
+}
+
+.about {
+    width: 50%;
+    padding: 8px;
+}
+
+.button-container button {
     margin: 5px;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     border: none;
-    font-size: 16px;
+    font-size: 2rem;
     color: #fff;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.more-info button.save {
+.button-container img {
+    width: 4.5rem;
+    margin-left: 8px;
+}
+
+.button-container button.save {
     background-color: #5cb85c;
 }
 
-.more-info button.foster {
-    background-color: #f0ad4e;
+.button-container button.foster {
+    background-color: var(--green);
 }
 
-.more-info button.adopt {
-    background-color: #d9534f;
+.button-container button.adopt {
+    background-color: var(--orange);
 }
 
-.more-info button.return {
-    background-color: #5bc0de;
+.button-container button.return {
+    background-color: var(--blue);
 }
 
-/* Style for the pet card button container */
-.more-info .button-container {
+.pet-wrapper .button-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-top: 10px;
 }
 
-/* Style for the pet card save button when already saved */
-.more-info button.save.saved {
+.pet-wrapper button.save.saved {
     background-color: #f0ad4e;
 }

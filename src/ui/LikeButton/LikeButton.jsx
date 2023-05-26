@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useEffect } from "react";
 
 const LikeButton = ({ addLiked, favorited }) => {
   const handleButtonClick = async (e) => {

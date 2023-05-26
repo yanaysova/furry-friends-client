@@ -1,8 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchResults from "../../components/SearchResults/SearchResults";
 import SearchFilter from "../../components/SearchFilter/SearchFilter";
+import { publicInstance } from "../../utilities/api";
 
 const SearchPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [petArray, setPetArray] = useState([]);
+  const [searchParams, setSearchParams] = useState({});
+
+  const getPets = async (queryString) => {
+    setIsLoading(true);
+    try {
+      const res = await publicInstance.get(
+        `http://localhost:8080/pet${queryString}`
+      );
+      const results = res.data.data.results;
+      setPetArray(results);
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    const search = window.location.search;
+    getPets(search);
+  }, [window.location.search]);
+
   return (
     <>
       <div
@@ -15,7 +39,7 @@ const SearchPage = () => {
         }}
       >
         <SearchFilter />
-        <SearchResults />
+        <SearchResults petArray={petArray} isLoading={isLoading} />
       </div>
     </>
   );

@@ -14,9 +14,6 @@ const Navbar = () => {
   return (
     <nav className="nav-container">
       <SiteHeader />
-      <div>
-        <button type="text" placeholder="Lets find a new buddy!" />
-      </div>
       <div className="user-nav">
         {currentUser ? (
           <AvatarMenu />

@@ -50,6 +50,13 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
     { label: "Inactive", value: "Inactive" },
   ];
 
+  const ageSelector = [
+    { label: "Puppy (0-2)", value: "Puppy" },
+    { label: "Young (2-5)", value: "Young" },
+    { label: "Adult (5-10)", value: "Adult" },
+    { label: "Senior (10+)", value: "Senior" },
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!picture) {
@@ -78,6 +85,20 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
         console.log(picture);
         await uploadInstance.post(`/pet`, PetData);
         handleAlert(`${name} added successfully to database`, "success");
+        setType("");
+        setName("");
+        setGender("");
+        setAge("");
+        setAdoptionStatus("Available");
+        setPicture("");
+        setHeight("");
+        setWeight("");
+        setColor("");
+        setBio("");
+        setHypoallergenic(false);
+        setDiatery([]);
+        setBreed("");
+        setIsEmpty(false);
       }
     } catch (error) {
       if (error.response) {
@@ -113,11 +134,10 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
             value={name}
             setState={setName}
           />
-          <TextInput
-            type={"number"}
+          <Selector
             label={"Age"}
-            isRequiered={true}
-            value={age}
+            menuItems={ageSelector}
+            state={age}
             setState={setAge}
           />
         </div>
@@ -154,14 +174,14 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
         <div className="input-box">
           <TextInput
             type={"number"}
-            label={"Height"}
+            label={"Height (cm)"}
             isRequiered={true}
             value={height}
             setState={setHeight}
           />
           <TextInput
             type={"number"}
-            label={"Weight"}
+            label={"Weight (kg)"}
             isRequiered={true}
             value={weight}
             setState={setWeight}

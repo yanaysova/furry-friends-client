@@ -2,15 +2,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70%;
+    width: 100%;
     margin: 1rem;
     overflow-y: auto;
     max-height: calc(100vh - 8rem);
+    padding: 0 1rem;
 }
 
 .pet-gallery {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1rem;
+    justify-items: center;
+}
+
+@media (min-width: 600px) {
+    .results-container {
+        width: 70%;
+    }
 }

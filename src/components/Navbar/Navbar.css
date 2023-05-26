@@ -22,3 +22,10 @@
 .nav-container a:visited {
     color: inherit;
 }
+
+@media (max-width: 600px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+
+}

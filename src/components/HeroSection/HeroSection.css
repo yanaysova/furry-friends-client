@@ -19,6 +19,7 @@
 .logged-selection {
     margin-top: 2rem;
     display: flex;
+    flex-direction: row;
 }
 
 .logged-selection button {
@@ -39,4 +40,24 @@
     font-size: 1.5rem;
     text-align: center;
     line-height: 2rem;
+}
+
+
+@media (max-width: 600px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section h3 {
+        font-size: 1.2rem;
+    }
+
+    .logged-selection {
+        margin: 0
+    }
+
+    .new-user-p {
+        font-size: 1.2rem;
+        background-color: #ffffff36;
+    }
 }

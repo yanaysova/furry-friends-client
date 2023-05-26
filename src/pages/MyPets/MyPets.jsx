@@ -2,31 +2,43 @@ import React, { useEffect, useContext, useState } from "react";
 import { usersContextRef } from "../../context/usersContext";
 import PawLoader from "../../ui/PawLoader/PawLoader";
 import { privateInstance } from "../../utilities/api";
-import { Tooltip } from "@mui/material";
 import PetCard from "../../ui/PetCard/PetCard";
 import "./MyPets.css";
+import Digging from "../../assets/digging.jpg";
+import LinkButton from "../../ui/LinkButton/LinkButton";
+import { useNavigate } from "react-router-dom";
 
 const MyPets = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [favoritedPets, setFavoritedPets] = useState([]);
+  const [adoptedPets, setAdoptedPets] = useState([]);
+  const [fosteredPets, setFosteredPets] = useState([]);
 
   const { currentUser } = useContext(usersContextRef);
 
-  useEffect(() => {
-    getUserExtendedInfo(currentUser._id);
-  }, [currentUser]);
+  const navigate = useNavigate();
 
-  const getUserExtendedInfo = async (userId) => {
+  useEffect(() => {
+    if (currentUser) getUserPets(currentUser.ID);
+  }, [currentUser.ID]);
+
+  const getUserPets = async (userId) => {
     setIsLoading(true);
     try {
-      const res = await privateInstance.get(`/user/${userId}/all`);
+      const res = await privateInstance.get(`/pet/user/${userId}`);
+      console.log(res);
       setFavoritedPets(res.data.data.savedPets);
+      setFosteredPets(res.data.data.fosteredPets);
+      setAdoptedPets(res.data.data.adoptedPets);
       setIsLoading(false);
+      console.log(favoritedPets);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
     }
   };
+
+  //TODO: Display image when user doesnt have pets
 
   return (
     <div className="my-pets-wrapper">
@@ -37,21 +49,54 @@ const MyPets = () => {
         <div className="pet-collections">
           <div>
             <h2>Currently Adopting</h2>
-            {favoritedPets?.map((pet) => (
-              <PetCard key={pet._id} pet={pet} isLoading={isLoading} />
-            ))}
+            {adoptedPets.length > 0 ? (
+              <div className="gallery">
+                {adoptedPets.map((pet) => (
+                  <PetCard key={pet._id} pet={pet} isLoading={isLoading} />
+                ))}
+              </div>
+            ) : (
+              <div>
+                <span>You currently don't have any adopted pets, </span>{" "}
+                <LinkButton onClick={() => navigate("/search")}>
+                  Adopt a pet today!
+                </LinkButton>
+              </div>
+            )}
           </div>
           <div>
             <h2>Currently Fostering</h2>
-            {favoritedPets?.map((pet) => (
-              <PetCard key={pet._id} pet={pet} isLoading={isLoading} />
-            ))}
+            {fosteredPets.length > 0 ? (
+              <div className="gallery">
+                {fosteredPets.map((pet) => (
+                  <PetCard key={pet._id} pet={pet} isLoading={isLoading} />
+                ))}
+              </div>
+            ) : (
+              <div>
+                <span>You currently don't foster any pets, </span>{" "}
+                <LinkButton onClick={() => navigate("/search")}>
+                  Foster a pet today!
+                </LinkButton>
+              </div>
+            )}
           </div>
           <div>
             <h2>Favorited Pets</h2>
-            {favoritedPets?.map((pet) => (
-              <PetCard key={pet._id} pet={pet} isLoading={isLoading} />
-            ))}
+            {favoritedPets.length > 0 ? (
+              <div className="gallery">
+                {favoritedPets.map((pet) => (
+                  <PetCard key={pet._id} pet={pet} isLoading={isLoading} />
+                ))}
+              </div>
+            ) : (
+              <div>
+                <span>You currently don't have any pets in favorites, </span>{" "}
+                <LinkButton onClick={() => navigate("/search")}>
+                  Browse our pet selection here!
+                </LinkButton>
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -8,10 +8,21 @@
     box-shadow: rgba(17, 12, 46, 0.10) 0px 48px 100px 0px;
 }
 
-.pet-collections div {
+.pet-collections {
     display: flex;
+    flex-direction: column;
 }
 
 .pet-collections h2 {
     text-decoration: underline;
+    font-size: 1.5rem;
+    color: var(--orange);
+    margin: 8px 0;
+}
+
+.gallery {
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    margin: 8px 0;
 }

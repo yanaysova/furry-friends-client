@@ -1,7 +1,7 @@
 import { styled } from "@mui/system";
 import Button from "@mui/material/Button";
 
-const SquareButton = styled(Button)({
+const SquareButton = styled(Button)(({ theme }) => ({
   width: "7rem",
   height: "7rem",
   backgroundColor: "var(--white)",
@@ -20,6 +20,11 @@ const SquareButton = styled(Button)({
     cursor: "pointer",
     backgroundColor: "var(--white)",
   },
-});
+  [theme.breakpoints.down("sm")]: {
+    width: "5.5rem",
+    height: "5.5rem",
+    fontSize: "1.2rem",
+  },
+}));
 
 export default SquareButton;

@@ -1,12 +1,12 @@
 import { styled } from "@mui/system";
 import Button from "@mui/material/Button";
 
-const StyledButton = styled(Button)({
+const StyledButton = styled(Button)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   border: "none",
-  borderRadius: "30px",
+  borderRadius: "10px",
   width: "fit-content",
   padding: "0 20px",
   fontFamily: "'Yanone Kaffeesatz', sans-serif",
@@ -25,6 +25,10 @@ const StyledButton = styled(Button)({
     backgroundColor: "transparent",
     border: "1px solid lightgrey",
   },
-});
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "1rem",
+    padding: "0 15px",
+  },
+}));
 
 export default StyledButton;

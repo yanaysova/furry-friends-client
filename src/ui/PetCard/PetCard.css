@@ -21,12 +21,21 @@
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 5px;
     grid-auto-flow: row;
-    justify-items: center;
+    justify-items: flex-start;
     align-items: center;
 }
 
+/* TODO: fix overflow of breed */
 .card-info div {
     margin-top: 10px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    width: 100%;
+}
+
+.card-info span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

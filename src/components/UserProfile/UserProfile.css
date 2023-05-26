@@ -63,3 +63,12 @@
 .pet-btn:hover {
     cursor: pointer;
 }
+
+.user-pets {
+    display: flex;
+}
+
+.user-pets div {
+    margin: 8px;
+
+}

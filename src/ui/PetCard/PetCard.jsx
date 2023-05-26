@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useCallback } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,7 +6,6 @@ import CardMedia from "@mui/material/CardMedia";
 import { Tooltip } from "@mui/material";
 import PawLoader from "../PawLoader/PawLoader";
 import CakeIcon from "@mui/icons-material/Cake";
-import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
 import LikeButton from "../LikeButton/LikeButton";
@@ -14,6 +13,8 @@ import "./PetCard.css";
 import PetProfileUser from "../../components/PetProfileUser/PetProfileUser";
 import { usersContextRef } from "../../context/usersContext";
 import { privateInstance } from "../../utilities/api";
+import DNA from "../../assets/dna.png";
+import Collar from "../../assets/collar.png";
 
 export default function PetCard({ pet, isLoading }) {
   const navigate = useNavigate();
@@ -63,7 +64,8 @@ export default function PetCard({ pet, isLoading }) {
 
   return (
     <Card
-      onClick={handleClick}
+      // onClick={handleClick}
+      onClick={() => navigate(`/petpage/${pet?._id}`)}
       sx={{
         maxWidth: 200,
         minWidth: 180,
@@ -121,15 +123,31 @@ export default function PetCard({ pet, isLoading }) {
                   </div>{" "}
                   <div>
                     <Tooltip title="Breed">
-                      <FingerprintIcon />
+                      <img
+                        src={DNA}
+                        alt="DNA Icon"
+                        style={{ width: "1.2rem", margin: "4px" }}
+                      />
                     </Tooltip>
                     <span>{pet?.breed}</span>
                   </div>
                   <div>
-                    <Tooltip title="AdoptionStatus">
-                      <FingerprintIcon />
+                    <Tooltip title="Availablity">
+                      <img
+                        src={Collar}
+                        alt="Collar Icon"
+                        style={{ width: "1.2rem", margin: "4px" }}
+                      />
                     </Tooltip>
-                    <span>{pet?.adoptionStatus}</span>
+                    <span
+                      style={
+                        pet?.adoptionStatus === "Available"
+                          ? { color: "var(--green)" }
+                          : {}
+                      }
+                    >
+                      {pet?.adoptionStatus}
+                    </span>
                   </div>
                 </div>
               </CardContent>

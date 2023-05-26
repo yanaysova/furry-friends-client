@@ -13,6 +13,8 @@ import PawLoader from "../../ui/PawLoader/PawLoader";
 const UserProfile = ({ selectedUser, handleEditPage }) => {
   const [userInfo, setUserInfo] = useState("");
   const [favoritedPets, setFavoritedPets] = useState([]);
+  const [fosteredPets, setFosteredPets] = useState([]);
+  const [adoptedPets, setAdoptedPets] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,6 +38,9 @@ const UserProfile = ({ selectedUser, handleEditPage }) => {
       const res = await privateInstance.get(`/user/${userId}/all`);
       setUserInfo(res.data.data);
       setFavoritedPets(res.data.data.savedPets);
+      setFosteredPets(res.data.data.fosteredPets);
+      setAdoptedPets(res.data.data.adoptedPets);
+      console.log(adoptedPets);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -109,84 +114,88 @@ const UserProfile = ({ selectedUser, handleEditPage }) => {
                 )}
               </ul>
             </div>
-            <div>
-              <h4>Favorited Pets</h4>
-              <ul>
-                {favoritedPets &&
-                  favoritedPets.map((pet) => {
-                    return (
-                      <li key={pet._id}>
-                        {pet.name}
-                        <Tooltip title="Open pet profile page in a new tab">
-                          <button
-                            className="pet-btn"
-                            onClick={() =>
-                              window.open(`/petpage/${pet._id}`, "_blank")
-                            }
-                          >
-                            <OpenInNewOutlinedIcon
-                              fontSize="inherit"
-                              color="info"
-                            />
-                          </button>
-                        </Tooltip>
-                        <br></br> <strong>ID:</strong> {pet._id}
-                      </li>
-                    );
-                  })}
-              </ul>
-              {/* TODO: Updated to display fostered pets   */}
-              <h4>Fostered Pets</h4>
-              <ul>
-                {favoritedPets &&
-                  favoritedPets.map((pet) => {
-                    return (
-                      <li key={pet._id}>
-                        {pet.name}
-                        <Tooltip title="Open pet profile page in a new tab">
-                          <button
-                            className="pet-btn"
-                            onClick={() =>
-                              window.open(`/petpage/${pet._id}`, "_blank")
-                            }
-                          >
-                            <OpenInNewOutlinedIcon
-                              fontSize="inherit"
-                              color="info"
-                            />
-                          </button>
-                        </Tooltip>
-                        <br></br> <strong>ID:</strong> {pet._id}
-                      </li>
-                    );
-                  })}
-              </ul>
-              {/* TODO: Updated to display adopted pets   */}
-              <h4>Adopted Pets</h4>
-              <ul>
-                {favoritedPets &&
-                  favoritedPets.map((pet) => {
-                    return (
-                      <li key={pet._id}>
-                        {pet.name}
-                        <Tooltip title="Open pet profile page in a new tab">
-                          <button
-                            className="pet-btn"
-                            onClick={() =>
-                              window.open(`/petpage/${pet._id}`, "_blank")
-                            }
-                          >
-                            <OpenInNewOutlinedIcon
-                              fontSize="inherit"
-                              color="info"
-                            />
-                          </button>
-                        </Tooltip>
-                        <br></br> <strong>ID:</strong> {pet._id}
-                      </li>
-                    );
-                  })}
-              </ul>
+            <div className="user-pets">
+              <div>
+                <h4>Favorited Pets</h4>
+                <ul>
+                  {favoritedPets &&
+                    favoritedPets.map((pet) => {
+                      return (
+                        <li key={pet._id}>
+                          {pet.name}
+                          <Tooltip title="Open pet profile page in a new tab">
+                            <button
+                              className="pet-btn"
+                              onClick={() =>
+                                window.open(`/petpage/${pet._id}`, "_blank")
+                              }
+                            >
+                              <OpenInNewOutlinedIcon
+                                fontSize="inherit"
+                                color="info"
+                              />
+                            </button>
+                          </Tooltip>
+                          <br></br> <strong>ID:</strong> {pet._id}
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
+              <div>
+                <h4>Fostered Pets</h4>
+                <ul>
+                  {fosteredPets &&
+                    fosteredPets.map((pet) => {
+                      return (
+                        <li key={pet._id}>
+                          {pet.name}
+                          <Tooltip title="Open pet profile page in a new tab">
+                            <button
+                              className="pet-btn"
+                              onClick={() =>
+                                window.open(`/petpage/${pet._id}`, "_blank")
+                              }
+                            >
+                              <OpenInNewOutlinedIcon
+                                fontSize="inherit"
+                                color="info"
+                              />
+                            </button>
+                          </Tooltip>
+                          <br></br> <strong>ID:</strong> {pet._id}
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
+              <div>
+                <h4>Adopted Pets</h4>
+                <ul>
+                  {adoptedPets &&
+                    adoptedPets.map((pet) => {
+                      return (
+                        <li key={pet._id}>
+                          {pet.name}
+                          <Tooltip title="Open pet profile page in a new tab">
+                            <button
+                              className="pet-btn"
+                              onClick={() =>
+                                window.open(`/petpage/${pet._id}`, "_blank")
+                              }
+                            >
+                              <OpenInNewOutlinedIcon
+                                fontSize="inherit"
+                                color="info"
+                              />
+                            </button>
+                          </Tooltip>
+                          <br></br> <strong>ID:</strong> {pet._id}
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
             </div>
           </div>
           <Tooltip title="Back to list">

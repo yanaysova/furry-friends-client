@@ -29,6 +29,7 @@ const LoginForm = ({ handleToggleForm }) => {
       setCurrentUser(user);
       setIsAdmin(user.isAdmin);
       localStorage.setItem("token", res.data.token);
+      console.log(user);
       if (user.isAdmin) {
         navigate("/admin");
       }
