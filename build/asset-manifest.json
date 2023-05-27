@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2959f07a.css",
+    "main.js": "/static/js/main.d66b42f4.js",
+    "static/media/banner.jpg": "/static/media/banner.bbd6badebb8969b4b66c.jpg",
+    "static/media/empty_mypets.png": "/static/media/empty_mypets.1c24ca193b0a5b0254e5.png",
+    "static/media/paw_prints_trail_across_screen.png": "/static/media/paw_prints_trail_across_screen.b5a32f513d2501af3600.png",
+    "static/media/furryfriends_logo.png": "/static/media/furryfriends_logo.a10f18ade1f18e1122eb.png",
+    "index.html": "/index.html",
+    "main.2959f07a.css.map": "/static/css/main.2959f07a.css.map",
+    "main.d66b42f4.js.map": "/static/js/main.d66b42f4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2959f07a.css",
+    "static/js/main.d66b42f4.js"
+  ]
+}
