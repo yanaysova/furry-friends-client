@@ -16,9 +16,7 @@ const SearchPage = () => {
         : "?adoptionStatus=Available";
     }
     try {
-      const res = await publicInstance.get(
-        `http://localhost:8080/pet${queryString}`
-      );
+      const res = await publicInstance.get(`pet${queryString}`);
       const results = res.data.data.results;
       setPetArray(results);
     } catch (error) {
