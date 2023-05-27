@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from "react";
-import axios from "axios";
 import TextField from "@mui/material/TextField";
 import TextInput from "../../ui/TextInput/TextInput";
 import StyledButton from "../../ui/StyleButton/StyledButton";
 import { usersContextRef } from "../../context/usersContext";
 import "./AboutForm.css";
+import { privateInstance } from "../../utilities/api";
 
 const AboutForm = ({ handleAlert }) => {
   const [firstName, setFirstName] = useState("");
@@ -17,6 +17,7 @@ const AboutForm = ({ handleAlert }) => {
     setFirstName(currentUser.firstName);
     setLastName(currentUser.lastName);
     setPhoneNum(currentUser.phoneNum);
+    console.log(currentUser);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -29,8 +30,8 @@ const AboutForm = ({ handleAlert }) => {
         phoneNum,
         ...(bio !== "A little about you" && { bio }),
       };
-      const res = await axios.put(
-        `http://localhost:8080/user/${currentUser.id}`,
+      const res = await privateInstance.put(
+        `/user/${currentUser.ID}`,
         updatedUser
       );
       setCurrentUser(res.data);

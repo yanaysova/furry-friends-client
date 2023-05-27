@@ -25,7 +25,6 @@
     align-items: center;
 }
 
-/* TODO: fix overflow of breed */
 .card-info div {
     margin-top: 10px;
     display: flex;

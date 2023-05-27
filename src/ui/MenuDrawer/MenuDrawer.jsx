@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-const MenuDrawer = ({ label, menuItems, setState, customContent }) => {
+const MenuDrawer = ({
+  label,
+  menuItems,
+  state,
+  setState,
+  customContent,
+  action,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -18,6 +25,12 @@ const MenuDrawer = ({ label, menuItems, setState, customContent }) => {
     setState(value);
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    if (typeof action === "function") {
+      action();
+    }
+  }, [state]);
 
   return (
     <div>
@@ -56,7 +69,6 @@ const MenuDrawer = ({ label, menuItems, setState, customContent }) => {
           vertical: "top",
           horizontal: "right",
         }}
-        getContentAnchorEl={null}
         sx={{
           marginTop: "14px",
         }}

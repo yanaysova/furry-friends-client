@@ -56,16 +56,19 @@
     width: 30%;
 }
 
+@media (max-width: 1400px) {
+
+    .filter-wrapper form {
+        width: auto;
+    }
+}
+
 @media (max-width: 768px) {
     .filter-wrapper {
         height: auto;
         padding: 1rem 0;
         flex-direction: column;
         max-height: calc(100vh - 4rem);
-    }
-
-    .filter-wrapper form {
-        width: auto;
     }
 
     .filtering-section,

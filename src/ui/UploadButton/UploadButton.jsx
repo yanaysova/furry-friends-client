@@ -32,7 +32,15 @@ const UploadButton = ({ setFile, setIsEmpty, isEmpty }) => {
           onChange={handleFileUpload}
         />
       </Button>
-      <Box>{filename}</Box>
+      <Box
+        style={{
+          maxWidth: "150px",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
+      >
+        {filename}
+      </Box>
       {isEmpty && <span style={{ color: "red" }}>*Please upload image</span>}
     </div>
   );

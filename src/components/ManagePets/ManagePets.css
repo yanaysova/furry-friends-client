@@ -1,6 +1,7 @@
 .search-wrapper {
     display: flex;
     margin: 1rem 0;
+    width: 50%;
 }
 
 .search-wrapper input {
@@ -18,6 +19,27 @@
     border-color: var(--orange);
 }
 
-.search-wrapper select {
-    margin: 0 8px;
+@media (max-width: 1350px) {
+
+    .search-wrapper {
+        width: 80%;
+
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .search-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search-wrapper input {
+        margin: 10px 0 !important;
+    }
+
+    .search-wrapper div {
+        margin: 8px 0 !important;
+    }
 }

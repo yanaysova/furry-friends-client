@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const publicInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
+  withCredentials: true,
 });
 
 export const privateInstance = axios.create({

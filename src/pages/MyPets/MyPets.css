@@ -26,3 +26,55 @@
     border-radius: 20px;
     margin: 8px 0;
 }
+
+.no-pets {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.no-pets h2 {
+    font-size: 2rem;
+}
+
+.no-pets button {
+    font-size: 1.5rem;
+}
+
+.no-pets img {
+    max-width: 50%;
+    min-width: 30%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .my-pets-wrapper {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .pet-collections h2 {
+        font-size: 1.2rem;
+    }
+
+    .gallery {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .no-pets h2 {
+        font-size: 1.5rem;
+    }
+
+    .no-pets button {
+        font-size: 1.2rem;
+    }
+
+    .no-pets img {
+        max-width: 70%;
+    }
+}

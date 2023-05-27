@@ -8,3 +8,16 @@
     box-shadow: rgba(17, 12, 46, 0.10) 0px 48px 100px 0px;
     background-color: var(--white);
 }
+
+@media (max-width: 768px) {
+    .admin-page {
+        width: 90%;
+        padding: 1.5rem 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-page {
+        width: 95%;
+    }
+}

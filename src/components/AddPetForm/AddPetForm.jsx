@@ -12,6 +12,7 @@ import "./AddPetForm.css";
 import EditPhoto from "../../ui/EditPhoto/EditPhoto";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Tooltip } from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
   const [type, setType] = useState(selectedPet?.type || "");
@@ -32,6 +33,7 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
   const [diatery, setDiatery] = useState(selectedPet?.diatery || []);
   const [breed, setBreed] = useState(selectedPet?.breed || "");
   const [isEmpty, setIsEmpty] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const typeSelector = [
     { label: "Dog", value: "Dog" },
@@ -64,6 +66,7 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
       return;
     }
     try {
+      setIsLoading(true);
       const PetData = new FormData();
       PetData.append("type", type);
       PetData.append("name", name);
@@ -81,8 +84,8 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
       if (selectedPet) {
         await uploadInstance.patch(`/pet/${selectedPet._id}`, PetData);
         handleAlert(`${name} successfully updated`, "success");
+        setIsLoading(false);
       } else {
-        console.log(picture);
         await uploadInstance.post(`/pet`, PetData);
         handleAlert(`${name} added successfully to database`, "success");
         setType("");
@@ -99,23 +102,15 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
         setDiatery([]);
         setBreed("");
         setIsEmpty(false);
+        setIsLoading(false);
       }
     } catch (error) {
+      setIsLoading(false);
       if (error.response) {
         handleAlert(error.response.data.message, "error");
       } else {
         handleAlert(error.message, "error");
       }
-    }
-  };
-
-  //TODO: Implement delete?
-  const handleDelete = async () => {
-    try {
-      await uploadInstance.delete(`/pet/${selectedPet._id}`);
-      handleAlert(`${name} successfully deleted from database`, "success");
-    } catch (error) {
-      handleAlert(error.message, "error");
     }
   };
 
@@ -187,7 +182,6 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
             setState={setWeight}
           />
         </div>
-        {/* TODO: Update user name for adopted and fostered */}
         <div className="input-box" style={{ justifyContent: "space-between" }}>
           {selectedPet ? (
             <div className="admin-pet-info">
@@ -195,10 +189,10 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
                 <span>Adoption Status: Available</span>
               )}
               {selectedPet.adoptionStatus === "Adopted" && (
-                <span>Adopted by Admin</span>
+                <span>Adopted by {selectedPet.user}</span>
               )}
               {selectedPet.adoptionStatus === "Fostered" && (
-                <span>Fostered by Admin</span>
+                <span>Fostered by {selectedPet.user}</span>
               )}
               <span>Created by: {selectedPet.createdBy}</span>
               <span>
@@ -283,11 +277,12 @@ const AddPetForm = ({ handleAlert, selectedPet, handleEditPage }) => {
         <StyledButton type="submit">
           {selectedPet ? "Update Changes" : "Upload Pet"}
         </StyledButton>
-        {/* TODO: Implement delete pet? needs to delete from user favorites and adopted status */}
-        {/* {selectedPet && (
-          <StyledButton onClick={handleDelete}>Delete Pet</StyledButton>
-        )} */}
       </form>
+      {isLoading && (
+        <div style={{ width: "50%", alignSelf: "center" }}>
+          <LinearProgress />
+        </div>
+      )}
       {selectedPet && (
         <Tooltip title="Back to list">
           <StyledButton onClick={() => handleEditPage("")}>

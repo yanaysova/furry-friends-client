@@ -11,12 +11,12 @@ import Box from "@mui/material/Box";
 const SearchFilter = () => {
   const [searchText, setSearchText] = useState("");
   const [searchBy, setSearchBy] = useState("name");
-  const [typeFilter, setTypeFilter] = useState("Any");
+  const [typeFilter, setTypeFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("Available");
   const [genderFilter, setGenderFilter] = useState("Any");
   const [ageFilter, setAgeFilter] = useState("Any");
-  const [weightFilter, setWeightFilter] = useState([1, 50]);
-  const [heightFilter, setHeightFilter] = useState([5, 60]);
+  const [weightFilter, setWeightFilter] = useState([0, 100]);
+  const [heightFilter, setHeightFilter] = useState([0, 150]);
 
   const navigate = useNavigate();
 
@@ -29,16 +29,18 @@ const SearchFilter = () => {
   };
 
   const handleSubmitForm = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     buildQuery();
   };
 
   const handleWeightSlider = (event, newValue) => {
     setWeightFilter(newValue);
+    buildQuery();
   };
 
   const handleHeightSlider = (event, newValue) => {
     setHeightFilter(newValue);
+    buildQuery();
   };
 
   const buildQuery = () => {
@@ -97,10 +99,10 @@ const SearchFilter = () => {
         onChange={handleWeightSlider}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
-        step={10}
+        step={20}
         marks
-        min={5}
-        max={50}
+        min={0}
+        max={100}
       />
       <span>Height (cm):</span>
       <Slider
@@ -109,10 +111,10 @@ const SearchFilter = () => {
         onChange={handleHeightSlider}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
-        step={5}
+        step={20}
         marks
-        min={5}
-        max={60}
+        min={0}
+        max={150}
       />
     </Box>
   );
@@ -126,6 +128,7 @@ const SearchFilter = () => {
             menuItems={filterTypeOptions}
             setState={setTypeFilter}
             state={typeFilter}
+            action={handleSubmitForm}
           />
           <Divider orientation="vertical" />
           <MenuDrawer
@@ -133,6 +136,7 @@ const SearchFilter = () => {
             menuItems={filterStatusOptions}
             setState={setStatusFilter}
             state={statusFilter}
+            action={handleSubmitForm}
           />
           <Divider orientation="vertical" />
           <MenuDrawer
@@ -140,6 +144,7 @@ const SearchFilter = () => {
             menuItems={filterGenderOptions}
             setState={setGenderFilter}
             state={genderFilter}
+            action={handleSubmitForm}
           />
           <Divider orientation="vertical" />
           <MenuDrawer
@@ -147,6 +152,7 @@ const SearchFilter = () => {
             menuItems={filterAgeOptions}
             setState={setAgeFilter}
             state={ageFilter}
+            action={handleSubmitForm}
           />
           <Divider orientation="vertical" />
           <MenuDrawer
@@ -181,7 +187,7 @@ const SearchFilter = () => {
                   position: "absolute",
                   top: "0px",
                   height: "100%",
-                  right: "25%",
+                  right: "10%",
                   cursor: "pointer",
                 }}
                 onClick={handleClearInput}

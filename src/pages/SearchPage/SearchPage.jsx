@@ -6,10 +6,15 @@ import { publicInstance } from "../../utilities/api";
 const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [petArray, setPetArray] = useState([]);
-  const [searchParams, setSearchParams] = useState({});
 
   const getPets = async (queryString) => {
     setIsLoading(true);
+
+    if (!queryString.includes("adoptionStatus=")) {
+      queryString += queryString
+        ? "&adoptionStatus=Available"
+        : "?adoptionStatus=Available";
+    }
     try {
       const res = await publicInstance.get(
         `http://localhost:8080/pet${queryString}`

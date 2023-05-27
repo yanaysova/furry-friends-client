@@ -34,7 +34,7 @@ export default function AvatarMenu() {
   const handleLogout = async () => {
     try {
       const response = await privateInstance.post("/auth/logout");
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 204) {
         localStorage.removeItem("token");
         navigate("/");
         setCurrentUser(null);

@@ -4,7 +4,7 @@ import PawLoader from "../../ui/PawLoader/PawLoader";
 import { privateInstance } from "../../utilities/api";
 import PetCard from "../../ui/PetCard/PetCard";
 import "./MyPets.css";
-import Digging from "../../assets/digging.jpg";
+import EmptyMyPets from "../../assets/empty_mypets.png";
 import LinkButton from "../../ui/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
 
@@ -38,13 +38,21 @@ const MyPets = () => {
     }
   };
 
-  //TODO: Display image when user doesnt have pets
-
   return (
     <div className="my-pets-wrapper">
       <h1>Your pets</h1>
       {isLoading ? (
         <PawLoader />
+      ) : adoptedPets.length === 0 &&
+        fosteredPets.length === 0 &&
+        favoritedPets.length === 0 ? (
+        <div className="no-pets">
+          <h2>No pets yet! </h2>
+          <LinkButton onClick={() => navigate("/search")}>
+            Find your first furry friend today!
+          </LinkButton>
+          <img src={EmptyMyPets} alt="No pets here" />
+        </div>
       ) : (
         <div className="pet-collections">
           <div>

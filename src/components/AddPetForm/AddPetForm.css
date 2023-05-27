@@ -31,3 +31,29 @@
     font-size: 1.2rem;
     font-weight: 400;
 }
+
+@media (max-width: 768px) {
+    .add-pet-form {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 5px;
+    }
+
+    .input-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .add-pet-form input,
+    .add-pet-form textarea,
+    .add-pet-form select {
+        width: 90%;
+        padding: 4px;
+        margin: 5px 0;
+    }
+
+    .admin-pet-info span {
+        margin: 4px;
+        font-size: 0.8rem;
+    }
+}

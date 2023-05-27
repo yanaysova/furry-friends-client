@@ -1,0 +1,50 @@
+.search-wrapper {
+    display: flex;
+    margin: 1rem 0;
+    width: 50%;
+}
+
+.search-wrapper input {
+    border: 2px solid var(--grey);
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    height: 3rem;
+    padding: 5px;
+    margin: 0 8px;
+    width: 50%;
+}
+
+.search-wrapper div {
+    width: 40%;
+}
+
+.search-wrapper input:focus {
+    outline: none;
+    border-color: var(--orange);
+}
+
+@media (max-width: 1350px) {
+
+    .search-wrapper {
+        width: 80%;
+
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .search-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search-wrapper input {
+        margin: 10px 0 !important;
+    }
+
+    .search-wrapper div {
+        margin: 8px 0 !important;
+    }
+}
