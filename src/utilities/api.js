@@ -9,6 +9,7 @@ export const privateInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
+  credentials: "include",
 });
 
 export const uploadInstance = axios.create({
