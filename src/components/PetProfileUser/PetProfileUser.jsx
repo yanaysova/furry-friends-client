@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import adopt from "../../assets/adopt.png";
 import foster from "../../assets/foster.png";
 import returnPet from "../../assets/return.png";
+import LikeButton from "../../ui/LikeButton/LikeButton";
 
 const PetProfileUser = ({ pet, handleAlert }) => {
   const [isFostering, setIsFostering] = useState(false);
@@ -45,28 +46,28 @@ const PetProfileUser = ({ pet, handleAlert }) => {
     }
   }, [currentUser, pet]);
 
-  // const handleLikeButton = async () => {
-  //   if (!currentUser) {
-  //     navigate("/auth");
-  //   }
-  //   if (!favorited) {
-  //     setFavorited(true);
-  //     try {
-  //       await privateInstance.post(`/pet/${pet._id}/save`);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setFavorited(false);
-  //     }
-  //   } else {
-  //     setFavorited(false);
-  //     try {
-  //       await privateInstance.delete(`/pet/${pet._id}/save`);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setFavorited(true);
-  //     }
-  //   }
-  // };
+  const handleLikeButton = async () => {
+    if (!currentUser) {
+      navigate("/auth");
+    }
+    if (!favorited) {
+      setFavorited(true);
+      try {
+        await privateInstance.post(`/pet/${pet._id}/save`);
+      } catch (error) {
+        console.log(error);
+        setFavorited(false);
+      }
+    } else {
+      setFavorited(false);
+      try {
+        await privateInstance.delete(`/pet/${pet._id}/save`);
+      } catch (error) {
+        console.log(error);
+        setFavorited(true);
+      }
+    }
+  };
 
   if (!pet) {
     return <PawLoader />;
@@ -143,6 +144,11 @@ const PetProfileUser = ({ pet, handleAlert }) => {
   return (
     <div className="pet-wrapper">
       <div className="photo-wrapper">
+        <LikeButton
+          addLiked={handleLikeButton}
+          favorited={favorited}
+          style={{ top: "25px", right: "20px" }}
+        />
         <img src={picture} alt={name} />
         <h2>Adoption Status: {status}</h2>
       </div>

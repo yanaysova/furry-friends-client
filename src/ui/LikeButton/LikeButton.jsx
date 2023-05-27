@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const LikeButton = ({ addLiked, favorited }) => {
+const LikeButton = ({ addLiked, favorited, style }) => {
   const handleButtonClick = async (e) => {
     e.stopPropagation();
     await addLiked();
@@ -29,6 +29,7 @@ const LikeButton = ({ addLiked, favorited }) => {
           background: "#ffffff",
           boxShadow: "rgba(100, 100, 111, 0.3) 0px 5px 5px 0px",
         },
+        ...style,
       }}
     >
       {favorited ? (
